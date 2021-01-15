@@ -47,7 +47,7 @@ var myFinal;
 
 function startGame() {
     myFinal = new component("25px", "sans-serif", "white", 150, 25, "text")
-    myGamePiece = new component(50, 30, "/images/rocket-1.png", 10, 120, "image");
+    myGamePiece = new component(50, 30, "/rocket-1.png", 10, 120, "image");
     myScore = new component("18px", "sans-serif", "yellow", 10, 250, "text");
   //  redGamePiece = new component(75, 75, "red", 10, 10);
   // yellowGamePiece = new component(75, 75, "yellow", 50, 60);
@@ -188,12 +188,12 @@ function moveleft() {
 }
 
 function moveright() {
-  myGamePiece.image.src = "/images/rocket-2.png";
+  myGamePiece.image.src = "/rocket-2.png";
   myGamePiece.speedX += 1;
 
 }
 function stopMove() {
-   myGamePiece.image.src = "/images/rocket-1.png";
+   myGamePiece.image.src = "/rocket-1.png";
 
   myGamePiece.speedX = 0;
   myGamePiece.speedY = 0;
