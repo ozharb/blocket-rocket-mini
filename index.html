@@ -47,8 +47,8 @@ var myFinal;
 
 function startGame() {
     myFinal = new component("25px", "sans-serif", "white", 150, 25, "text")
-    myGamePiece = new component(50, 30, "/rocket-1.jpeg", 10, 120, "image");
-    myScore = new component("18px", "sans-serif", "yellow", 10, 250, "text");
+    myGamePiece = new component(20, 15, "turquoise", 10, 120 );
+    myScore = new component("18px", "sans-serif", "yellow", 10, 380, "text");
   //  redGamePiece = new component(75, 75, "red", 10, 10);
   // yellowGamePiece = new component(75, 75, "yellow", 50, 60);
   // blueGamePiece = new component(75, 75, "blue", 10, 110);
@@ -99,9 +99,9 @@ this.crashWith = function(otherobj) {
     var othertop = otherobj.y;
     var otherbottom = otherobj.y + (otherobj.height);
     var crash = true;
-    if ((mybottom-5 < othertop) ||
-    (mytop+5 > otherbottom) ||
-    (myright-15 < otherleft) ||
+    if ((mybottom < othertop) ||
+    (mytop  > otherbottom) ||
+    (myright < otherleft) ||
     (myleft > otherright)) {
       
       crash = false;
@@ -113,8 +113,8 @@ this.crashWith = function(otherobj) {
 var myGameArea = {
   canvas : document.createElement("canvas"),
   start : function() {
-    this.canvas.width = 480;
-    this.canvas.height = 270;
+    this.canvas.width = 700;
+    this.canvas.height = 400;
     this.context = this.canvas.getContext("2d");
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     // add property for counting frames
@@ -153,14 +153,18 @@ function updateGameArea() {
  if (myGameArea.frameNo == 1 || everyinterval(150)) {
     x = myGameArea.canvas.width;
     minHeight = 40;
-    maxHeight = 100;
+    maxHeight = 200;
     height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
     minGap = 50;
     maxGap = 200;
     gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+    myObstacles.push(new component(5 ,5, "yellow", x, height -100 ));
      myObstacles.push(new component(10,10, "orange", x, gap));
+     myObstacles.push(new component(5, 5, "pink", x + 5, height + gap + 100));
      myObstacles.push(new component(5, 5, "white", x, height));
-    myObstacles.push(new component(5, 5, "white", x, height + gap));
+     myObstacles.push(new component(5, 5, "green", x, height));
+    
+    myObstacles.push(new component(5, 5, "blue", x, height + gap));
     // myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
   }
   for (i = 0; i < myObstacles.length; i += 1) {
@@ -188,13 +192,12 @@ function moveleft() {
 }
 
 function moveright() {
-  myGamePiece.image.src = "/rocket-2.jpeg";
+  
   myGamePiece.speedX += 1;
 
 }
 function stopMove() {
-   myGamePiece.image.src = "/rocket-1.jpeg";
-
+ 
   myGamePiece.speedX = 0;
   myGamePiece.speedY = 0;
 
